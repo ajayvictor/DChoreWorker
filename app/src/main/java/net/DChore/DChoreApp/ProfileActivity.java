@@ -93,7 +93,15 @@ public class ProfileActivity extends AppCompatActivity {
         else{
 
         }
+
+
+
+
     }
+
+
+
+
 
 
     private static class MyOnClickListener implements View.OnClickListener {
@@ -123,6 +131,7 @@ public class ProfileActivity extends AppCompatActivity {
             Log.d("number", String.valueOf(selectedItemId) + ", Name: " +selectedName);
         }
 
+        /*
         private void removeItem(View v) {
             int selectedItemPosition = recyclerView.getChildPosition(v);
             RecyclerView.ViewHolder viewHolder
@@ -140,6 +149,7 @@ public class ProfileActivity extends AppCompatActivity {
             data.remove(selectedItemPosition);
             adapter.notifyItemRemoved(selectedItemPosition);
         }
+        */
     }
 
     @Override

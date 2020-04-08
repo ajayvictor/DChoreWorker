@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">D\'Chore</string>
+    <string name="dialog_date">Pick a Date</string>
 </resources>
