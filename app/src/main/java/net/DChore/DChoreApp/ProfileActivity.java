@@ -149,6 +149,8 @@ public class ProfileActivity extends AppCompatActivity {
                             //Toast.makeText(context.getApplicationContext(), "Invalid username or password", Toast.LENGTH_SHORT).show();
                         }
                     } catch (JSONException e) {
+                        Toast.makeText(getApplicationContext(), "Error Occured while connecting to the server", Toast.LENGTH_SHORT).show();
+
                         e.printStackTrace();
                     }
                 }
@@ -413,6 +415,8 @@ public class ProfileActivity extends AppCompatActivity {
                         //Toast.makeText(context.getApplicationContext(), "Invalid username or password", Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {
+                    Toast.makeText(getApplicationContext(), "Error Occured while connecting to the server", Toast.LENGTH_SHORT).show();
+
                     e.printStackTrace();
                 }
             }
