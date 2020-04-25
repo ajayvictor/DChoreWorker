@@ -284,7 +284,7 @@ public class ProfileActivity extends AppCompatActivity {
             builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    Toast.makeText(context.getApplicationContext(), "You've changed your mind to delete all records", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context.getApplicationContext(), "You've changed your mind to book this worker!! Feel free to book again, Thanks!", Toast.LENGTH_SHORT).show();
                 }
             });
 
@@ -332,6 +332,19 @@ public class ProfileActivity extends AppCompatActivity {
 
         Log.d("check", "clicked!!");
         User user;
+
+        TextView addItem = findViewById(R.id.add_item);
+
+        addItem.setText("Home");
+
+        addItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent (ProfileActivity.this, ProfileActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
 
         user = SharedPrefManager.getInstance(getApplicationContext()).getUser();
