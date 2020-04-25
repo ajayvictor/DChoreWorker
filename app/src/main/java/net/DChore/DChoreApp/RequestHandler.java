@@ -15,7 +15,7 @@ import java.util.Map;
 import javax.net.ssl.HttpsURLConnection;
 
 /**
- * Created by Belal on 9/5/2017.
+ * Created by
  */
 
 public class RequestHandler {
@@ -28,6 +28,7 @@ public class RequestHandler {
         URL url;
 
         StringBuilder sb = new StringBuilder();
+
         try {
             url = new URL(requestURL);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -61,7 +62,11 @@ public class RequestHandler {
 
         } catch (Exception e) {
             e.printStackTrace();
+            System.out.println("Exception: " + e.toString());
+            return e.toString();
         }
+        System.out.println("Send Post Request Completed: " + sb.toString());
+
         return sb.toString();
     }
 
@@ -80,7 +85,6 @@ public class RequestHandler {
             result.append("=");
             result.append(URLEncoder.encode(entry.getValue(), "UTF-8"));
         }
-
         return result.toString();
     }
 }

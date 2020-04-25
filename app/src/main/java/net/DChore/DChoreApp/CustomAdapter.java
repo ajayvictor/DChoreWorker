@@ -20,8 +20,6 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     private ArrayList<DataModel> dataSet;
 
 
-
-
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
         TextView textViewName;
@@ -49,6 +47,10 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
             final Dialog dialog = new Dialog(itemView.getContext());
             dialog.setCanceledOnTouchOutside(true);
 
+            ProfileActivity.time = null;
+
+            ProfileActivity.date = null;
+
 
             btn_date.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -69,7 +71,9 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
 
                             String date = dp.getDayOfMonth() + "-" + dp.getMonth() + "-" + dp.getYear();
 
-                            System.out.println("Clicked on Agree" +  date);
+                            System.out.println("Clicked on Agree" +  date );
+
+                            ProfileActivity.date = date;
 
                             btn_date.setText(date);
                             dialog.dismiss();
@@ -102,7 +106,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
                             final TimePicker timePicker=(TimePicker) dialog.findViewById(R.id.time_picker);
                             timePicker.setIs24HourView(false);
                             String time = getTime(Integer.parseInt(pad(timePicker.getHour())), Integer.parseInt(pad(timePicker.getMinute())));
-                            System.out.println("Clicked on Agree: " + " time " + time);
+                            System.out.println("Clicked on Agree: " + " time " + time + "name");
+                            ProfileActivity.time = time;
                             btn_time.setText(time);
                             dialog.dismiss();
                         }
@@ -149,7 +154,6 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         TextView textViewPlace = holder.textViewPlace;
         TextView textViewExperience = holder.textViewExperience;
         TextView textViewMobile = holder.textViewMobile;
-
 
         textViewName.setText(dataSet.get(listPosition).getName());
         textViewJob.setText(dataSet.get(listPosition).getJob());
