@@ -5,21 +5,18 @@ public class BookedDataModel {
 
 
     String name;
-    String job;
-    String place;
-    int age;
+    String email;
+    String location;
     int mobile;
     double experience;
     String date;
     String time;
 
-    public BookedDataModel(String name, String job, int age, String place, int mobile, double experience, String date, String time) {
+    public BookedDataModel(String name, String email, String location, int mobile, String date, String time) {
         this.name = name;
-        this.job = job;
-        this.age = age;
-        this.place = place;
+        this.email = email;
+        this.location = location;
         this.mobile=mobile;
-        this.experience=experience;
         this.date=date;
         this.time=time;
     }
@@ -30,18 +27,8 @@ public class BookedDataModel {
     }
 
 
-    public String getJob() {
-        return job;
-    }
-
-
-    public String getPlace() {
-        return place;
-    }
-
-
-    public Double getExperience() {
-        return experience;
+    public String getLocation() {
+        return location;
     }
 
 
@@ -50,9 +37,10 @@ public class BookedDataModel {
     }
 
 
-    public int getAge() {
-        return age;
+    public String getEmail() {
+        return email;
     }
+
 
     public String getDate() {
         return date;

@@ -22,7 +22,7 @@ import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
 
-    EditText editTextUsername, editTextEmail, editTextPassword;
+    EditText editTextUsername, editTextEmail, editTextPassword, editTextAge, editTextExperience, editTextLocation;
     RadioGroup radioGroupGender;
     Spinner categorySelector;
 
@@ -45,6 +45,9 @@ public class MainActivity extends AppCompatActivity {
         editTextUsername = (EditText) findViewById(R.id.editTextUsername);
         editTextEmail = (EditText) findViewById(R.id.editTextEmail);
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
+        editTextAge = (EditText) findViewById(R.id.editTextAge);
+        editTextLocation = (EditText) findViewById(R.id.editTextLocation);
+        editTextExperience = (EditText) findViewById(R.id.editTextExperience);
         radioGroupGender = (RadioGroup) findViewById(R.id.radioGender);
         categorySelector = findViewById(R.id.categorySelector);
 
@@ -74,6 +77,9 @@ public class MainActivity extends AppCompatActivity {
         final String username = editTextUsername.getText().toString().trim();
         final String email = editTextEmail.getText().toString().trim();
         final String password = editTextPassword.getText().toString().trim();
+        final String location = editTextLocation.getText().toString().trim();
+        final String experience = editTextExperience.getText().toString().trim();
+        final String age = editTextAge.getText().toString().trim();
         final String category = categorySelector.getSelectedItem().toString();
 
         final String gender = ((RadioButton) findViewById(radioGroupGender.getCheckedRadioButtonId())).getText().toString();
@@ -85,6 +91,25 @@ public class MainActivity extends AppCompatActivity {
             editTextUsername.requestFocus();
             return;
         }
+
+        if (TextUtils.isEmpty(location)) {
+            editTextLocation.setError("Please enter your correct Location");
+            editTextLocation.requestFocus();
+            return;
+        }
+
+        if (TextUtils.isEmpty(experience)) {
+            editTextExperience.setError("Please enter your experience in years");
+            editTextExperience.requestFocus();
+            return;
+        }
+
+        if (TextUtils.isEmpty(age)) {
+            editTextAge.setError("Please enter your age");
+            editTextAge.requestFocus();
+            return;
+        }
+
 
         if (TextUtils.isEmpty(email)) {
             editTextEmail.setError("Please enter your email");
@@ -104,11 +129,6 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        if (TextUtils.isEmpty(category)) {
-            editTextPassword.setError("Please select a category!");
-            editTextPassword.requestFocus();
-            return;
-        }
 
         //if it passes all the validations
 
@@ -128,6 +148,9 @@ public class MainActivity extends AppCompatActivity {
                 params.put("password", password);
                 params.put("gender", gender);
                 params.put("category", category);
+                params.put("experience", experience);
+                params.put("age", age);
+                params.put("location", location);
 
                 //returing the response
                 return requestHandler.sendPostRequest(URLs.URL_REGISTER, params);

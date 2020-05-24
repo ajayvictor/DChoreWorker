@@ -12,7 +12,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -91,9 +90,12 @@ public class ProfileActivity extends AppCompatActivity {
             final String username = user.getUsername();
 
 
+            TextView textViewBook = findViewById(R.id.textViewBook);
+
+            textViewBook.setText("Please find your bookings below!!");
 
 
-            class WorkerDatas extends AsyncTask<Void, Void, String> {
+            class BookedWorkerDatas extends AsyncTask<Void, Void, String> {
                 ProgressBar progressBar;
 
 
@@ -119,18 +121,18 @@ public class ProfileActivity extends AppCompatActivity {
                         if (obj.getBoolean("status")) {
                             Log.d("Status Message",obj.getString("status_message"));
 
-                            JSONArray jsonArray = new JSONArray(obj.getString("workers"));
+                            JSONArray jsonArray = new JSONArray(obj.getString("users"));
 
-                            data = new ArrayList<DataModel>();
+                            ArrayList<BookedDataModel> data = new ArrayList<BookedDataModel>();
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject first = jsonArray.getJSONObject(i);
-                                data.add(new DataModel(
+                                data.add(new BookedDataModel(
                                         first.getString("name"),
-                                        first.getString("job"),
-                                        first.getInt("age"),
-                                        first.getString("place"),
+                                        first.getString("email"),
+                                        first.getString("location"),
                                         first.getInt("mobile"),
-                                        first.getDouble("experience")
+                                        first.getString("date"),
+                                        first.getString("time")
                                 ));
                             }
 
@@ -139,7 +141,7 @@ public class ProfileActivity extends AppCompatActivity {
                             //getting the user from the response
                             //JSONObject userJson = obj.getJSONObject("workers");
 
-                            adapter = new CustomAdapter(data);
+                            adapter = new BookedCustomAdapter(data);
                             recyclerView.setAdapter(adapter);
 
 
@@ -166,17 +168,11 @@ public class ProfileActivity extends AppCompatActivity {
                     System.out.println("Execution Happening");
 
                     //returing the response
-                    return requestHandler.sendPostRequest(URLs.URL_WORKER_DATA, params);
+                    return requestHandler.sendPostRequest(URLs.URL_WORKERS_BOOKING, params);
                 }
             }
-            WorkerDatas workerDatas = new WorkerDatas();
-            workerDatas.execute();
-//            try {
-//                Thread.sleep(10000);
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
-//            Log.d("Message","Execution Completed");
+            BookedWorkerDatas bookedWorkerDatas = new BookedWorkerDatas();
+            bookedWorkerDatas.execute();
 
 
         }
@@ -327,120 +323,108 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
 
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        super.onOptionsItemSelected(item);
-
-        Log.d("check", "clicked!!");
-        User user;
-
-        TextView addItem = findViewById(R.id.add_item);
-
-        addItem.setText("Home");
-
-        addItem.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent (ProfileActivity.this, ProfileActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
-
-
-        user = SharedPrefManager.getInstance(getApplicationContext()).getUser();
-        final String username = user.getUsername();
-
-        TextView textViewBook = findViewById(R.id.textViewBook);
-
-        textViewBook.setText("Please find your bookings below!!");
-
-
-        class BookedWorkerDatas extends AsyncTask<Void, Void, String> {
-            ProgressBar progressBar;
-
-
-            @Override
-            protected void onPreExecute() {
-                super.onPreExecute();
-                progressBar = (ProgressBar) findViewById(R.id.progressBar);
-                progressBar.setVisibility(View.VISIBLE);
-
-            }
-
-            @Override
-            protected void onPostExecute(String s) {
-                super.onPostExecute(s);
-                progressBar = (ProgressBar) findViewById(R.id.progressBar);
-                progressBar.setVisibility(View.GONE);
-
-                try {
-                    //converting response to json object
-                    JSONObject obj = new JSONObject(s);
-
-                    //if no error in response
-                    if (obj.getBoolean("status")) {
-                        Log.d("Status Message",obj.getString("status_message"));
-
-                        JSONArray jsonArray = new JSONArray(obj.getString("workers"));
-
-                        ArrayList<BookedDataModel> data = new ArrayList<BookedDataModel>();
-                        for (int i = 0; i < jsonArray.length(); i++) {
-                            JSONObject first = jsonArray.getJSONObject(i);
-                            data.add(new BookedDataModel(
-                                    first.getString("name"),
-                                    first.getString("job"),
-                                    first.getInt("age"),
-                                    first.getString("place"),
-                                    first.getInt("mobile"),
-                                    first.getDouble("experience"),
-                                    first.getString("date"),
-                                    first.getString("time")
-                            ));
-                        }
-
-                        //0 for just retrieving first object you can loop it
-
-                        //getting the user from the response
-                        //JSONObject userJson = obj.getJSONObject("workers");
-
-                        adapter = new BookedCustomAdapter(data);
-                        recyclerView.setAdapter(adapter);
-
-
-                    } else {
-                        Log.d("Status Message","Error Occured");
-
-                        //Toast.makeText(context.getApplicationContext(), "Invalid username or password", Toast.LENGTH_SHORT).show();
-                    }
-                } catch (JSONException e) {
-                    Toast.makeText(getApplicationContext(), "Error Occured while connecting to the server", Toast.LENGTH_SHORT).show();
-
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            protected String doInBackground(Void... voids) {
-                //creating request handler object
-                RequestHandler requestHandler = new RequestHandler();
-
-                //creating request parameters
-                HashMap<String, String> params = new HashMap<>();
-                params.put("username", username);
-                System.out.println("Execution Happening");
-
-                //returing the response
-                return requestHandler.sendPostRequest(URLs.URL_BOOKED_DATA, params);
-            }
-        }
-        BookedWorkerDatas bookedWorkerDatas = new BookedWorkerDatas();
-        bookedWorkerDatas.execute();
-
-
-        return true;
-    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        super.onOptionsItemSelected(item);
+//
+//        Log.d("check", "clicked!!");
+//        User user;
+//
+//
+//
+//        user = SharedPrefManager.getInstance(getApplicationContext()).getUser();
+//        final String username = user.getUsername();
+//
+//        TextView textViewBook = findViewById(R.id.textViewBook);
+//
+//        textViewBook.setText("Please find your bookings below!!");
+//
+//
+//        class BookedWorkerDatas extends AsyncTask<Void, Void, String> {
+//            ProgressBar progressBar;
+//
+//
+//            @Override
+//            protected void onPreExecute() {
+//                super.onPreExecute();
+//                progressBar = (ProgressBar) findViewById(R.id.progressBar);
+//                progressBar.setVisibility(View.VISIBLE);
+//
+//            }
+//
+//            @Override
+//            protected void onPostExecute(String s) {
+//                super.onPostExecute(s);
+//                progressBar = (ProgressBar) findViewById(R.id.progressBar);
+//                progressBar.setVisibility(View.GONE);
+//
+//                try {
+//                    //converting response to json object
+//                    JSONObject obj = new JSONObject(s);
+//
+//                    //if no error in response
+//                    if (obj.getBoolean("status")) {
+//                        Log.d("Status Message",obj.getString("status_message"));
+//
+//                        JSONArray jsonArray = new JSONArray(obj.getString("workers"));
+//
+//                        ArrayList<BookedDataModel> data = new ArrayList<BookedDataModel>();
+//                        for (int i = 0; i < jsonArray.length(); i++) {
+//                            JSONObject first = jsonArray.getJSONObject(i);
+//                            data.add(new BookedDataModel(
+//                                    first.getString("name"),
+//                                    first.getString("job"),
+//                                    first.getInt("age"),
+//                                    first.getString("place"),
+//                                    first.getInt("mobile"),
+//                                    first.getDouble("experience"),
+//                                    first.getString("date"),
+//                                    first.getString("time")
+//                            ));
+//                        }
+//
+//                        //0 for just retrieving first object you can loop it
+//
+//                        //getting the user from the response
+//                        //JSONObject userJson = obj.getJSONObject("workers");
+//
+//                        adapter = new BookedCustomAdapter(data);
+//                        recyclerView.setAdapter(adapter);
+//
+//
+//                    } else {
+//                        Log.d("Status Message","Error Occured");
+//
+//                        //Toast.makeText(context.getApplicationContext(), "Invalid username or password", Toast.LENGTH_SHORT).show();
+//                    }
+//                } catch (JSONException e) {
+//                    Toast.makeText(getApplicationContext(), "Error Occured while connecting to the server", Toast.LENGTH_SHORT).show();
+//
+//                    e.printStackTrace();
+//                }
+//            }
+//
+//            @Override
+//            protected String doInBackground(Void... voids) {
+//                //creating request handler object
+//                RequestHandler requestHandler = new RequestHandler();
+//
+//                //creating request parameters
+//                HashMap<String, String> params = new HashMap<>();
+//                params.put("username", username);
+//                System.out.println("Execution Happening");
+//
+//                //returing the response
+//                return requestHandler.sendPostRequest(URLs.URL_BOOKED_DATA, params);
+//            }
+//        }
+//        BookedWorkerDatas bookedWorkerDatas = new BookedWorkerDatas();
+//        bookedWorkerDatas.execute();
+//
+//
+//        return true;
+//    }
 
     /*
 

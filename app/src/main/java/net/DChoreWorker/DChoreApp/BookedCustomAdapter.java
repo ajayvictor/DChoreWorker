@@ -19,10 +19,8 @@ public class BookedCustomAdapter extends RecyclerView.Adapter<BookedCustomAdapte
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
         TextView textViewName;
-        TextView textViewJob;
-        TextView textViewAge;
-        TextView textViewPlace;
-        TextView textViewExperience;
+        TextView textViewEmail;
+        TextView textViewLocation;
         TextView textViewMobile;
 
         Button btn_date, btn_time;
@@ -31,10 +29,8 @@ public class BookedCustomAdapter extends RecyclerView.Adapter<BookedCustomAdapte
         public MyViewHolder(final View itemView) {
             super(itemView);
             this.textViewName = (TextView) itemView.findViewById(R.id.textViewName);
-            this.textViewJob = (TextView) itemView.findViewById(R.id.textViewJob);
-            this.textViewAge = (TextView) itemView.findViewById(R.id.textViewAge);
-            this.textViewPlace = (TextView) itemView.findViewById(R.id.textViewPlace);
-            this.textViewExperience = (TextView) itemView.findViewById(R.id.textViewExperience);
+            this.textViewEmail = (TextView) itemView.findViewById(R.id.textViewEmail);
+            this.textViewLocation = (TextView) itemView.findViewById(R.id.textViewLocation);
             this.textViewMobile = (TextView) itemView.findViewById(R.id.textViewMobile);
 
             this.btn_date=(Button) itemView.findViewById(R.id.date_btn);
@@ -70,20 +66,16 @@ public class BookedCustomAdapter extends RecyclerView.Adapter<BookedCustomAdapte
     public void onBindViewHolder(final MyViewHolder holder, final int listPosition) {
 
         TextView textViewName = holder.textViewName;
-        TextView textViewJob = holder.textViewJob;
-        TextView textViewAge = holder.textViewAge;
-        TextView textViewPlace = holder.textViewPlace;
-        TextView textViewExperience = holder.textViewExperience;
+        TextView textViewEmail = holder.textViewEmail;
+        TextView textViewLocation = holder.textViewLocation;
         TextView textViewMobile = holder.textViewMobile;
         Button btn_date = holder.btn_date;
         Button btn_time = holder.btn_time;
 
 
         textViewName.setText(dataSet.get(listPosition).getName());
-        textViewJob.setText(dataSet.get(listPosition).getJob());
-        textViewAge.setText(String.valueOf(dataSet.get(listPosition).getAge()));
-        textViewPlace.setText(dataSet.get(listPosition).getPlace());
-        textViewExperience.setText(dataSet.get(listPosition).getExperience().toString());
+        textViewEmail.setText(dataSet.get(listPosition).getEmail());
+        textViewLocation.setText(dataSet.get(listPosition).getLocation());
         textViewMobile.setText(String.valueOf(dataSet.get(listPosition).getMobile()));
         btn_date.setText(String.valueOf(dataSet.get(listPosition).getDate()));
         btn_time.setText(String.valueOf(dataSet.get(listPosition).getTime()));
