@@ -1,4 +1,4 @@
-package net.DChore.DChoreApp;
+package net.DChoreWorker.DChoreApp;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -76,7 +76,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         myOnClickListener = new MyOnClickListener(this);
 
-        if(user.getCategory().equals("User")) {
+        if(user.getCategory().equals("Worker")) {
 
             recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
             recyclerView.setHasFixedSize(true);
@@ -92,7 +92,7 @@ public class ProfileActivity extends AppCompatActivity {
 
             TextView textViewBook = findViewById(R.id.textViewBook);
 
-            textViewBook.setText("Please find your bookings below!!");
+            textViewBook.setText("Please check your works below!!");
 
 
             class BookedWorkerDatas extends AsyncTask<Void, Void, String> {

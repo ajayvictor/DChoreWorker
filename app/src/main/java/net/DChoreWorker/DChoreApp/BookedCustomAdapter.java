@@ -1,4 +1,4 @@
-package net.DChore.DChoreApp;
+package net.DChoreWorker.DChoreApp;
 
 import android.app.Dialog;
 import android.support.v7.widget.RecyclerView;

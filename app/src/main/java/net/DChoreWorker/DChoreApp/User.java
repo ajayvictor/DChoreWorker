@@ -1,4 +1,4 @@
-package net.DChore.DChoreApp;
+package net.DChoreWorker.DChoreApp;
 
 public class User {
 

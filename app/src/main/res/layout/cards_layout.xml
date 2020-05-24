@@ -28,7 +28,7 @@
         <LinearLayout
             android:layout_width="10dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:layout_marginLeft="30dp"
             android:layout_weight="2"
             android:orientation="vertical"
@@ -41,7 +41,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="30dp"
                 android:text="Pick Date" />
 
             <Button
@@ -74,44 +74,25 @@
                     android:textAppearance="?android:attr/textAppearanceLarge"/>
 
                 <TextView
-                    android:id="@+id/textViewJob"
+                    android:id="@+id/textViewEmail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="10dp"
 
-                    android:text="Job Type: "
+                    android:text="Email: "
                     android:textAppearance="?android:attr/textAppearanceMedium"/>
 
                 <TextView
-                    android:id="@+id/textViewAge"
+                    android:id="@+id/textViewLocation"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="10dp"
 
-                    android:text="Age: "
+                    android:text="Location: "
                     android:textAppearance="?android:attr/textAppearanceMedium"/>
 
-                <TextView
-                    android:id="@+id/textViewPlace"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="10dp"
-
-                    android:text="Place: "
-                    android:textAppearance="?android:attr/textAppearanceMedium"/>
-
-                <TextView
-                    android:id="@+id/textViewExperience"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="10dp"
-
-                    android:text="Experience: "
-                    android:textAppearance="?android:attr/textAppearanceMedium"/>
 
                 <TextView
                     android:id="@+id/textViewMobile"
@@ -119,7 +100,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="10dp"
-
+                    android:layout_marginBottom="10dp"
                     android:text="Mobile: "
                     android:textAppearance="?android:attr/textAppearanceMedium"/>
 

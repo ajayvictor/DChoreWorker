@@ -1,4 +1,4 @@
-package net.DChore.DChoreApp;
+package net.DChoreWorker.DChoreApp;
 
 public class URLs {
 
@@ -6,6 +6,7 @@ public class URLs {
 
     public static final String URL_REGISTER = ROOT_URL + "worker_signup";
     public static final String URL_LOGIN = ROOT_URL + "login";
+    public static final String URL_WORKER_LOGIN = ROOT_URL + "worker_login";
     public static final String URL_WORKERS_BOOKING = ROOT_URL + "workers_bookings";
 
 

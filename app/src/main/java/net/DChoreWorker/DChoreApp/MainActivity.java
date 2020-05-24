@@ -1,4 +1,4 @@
-package net.DChore.DChoreApp;
+package net.DChoreWorker.DChoreApp;
 
 import android.content.Intent;
 import android.os.AsyncTask;

@@ -1,4 +1,4 @@
-package net.DChore.DChoreApp;
+package net.DChoreWorker.DChoreApp;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

@@ -1,4 +1,4 @@
-package net.DChore.DChoreApp;
+package net.DChoreWorker.DChoreApp;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="net.DChore.DChoreApp">
+    package="net.DChoreWorker.DChoreApp">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -12,9 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name="net.DChore.DChoreApp.ProfileActivity"></activity>
-        <activity android:name="net.DChore.DChoreApp.LoginActivity" />
-        <activity android:name="net.DChore.DChoreApp.MainActivity">
+        <activity android:name="net.DChoreWorker.DChoreApp.ProfileActivity"></activity>
+        <activity android:name="net.DChoreWorker.DChoreApp.LoginActivity" />
+        <activity android:name="net.DChoreWorker.DChoreApp.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -1,4 +1,4 @@
-package net.DChore.DChoreApp;
+package net.DChoreWorker.DChoreApp;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
@@ -131,7 +131,7 @@ public class LoginActivity extends AppCompatActivity {
                 params.put("password", password);
 
                 //returing the response
-                return requestHandler.sendPostRequest(URLs.URL_LOGIN, params);
+                return requestHandler.sendPostRequest(URLs.URL_WORKER_LOGIN, params);
             }
         }
 

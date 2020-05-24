@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="spinnerItems">
-        <item>User</item>
-        <item>Worker</item>
+        <item>Coconut Tree Climber</item>
+        <item>Plumber</item>
+        <item>Electrician</item>
+        <item>Contractor</item>
+        <item>Carpenter</item>
+        <item>Welder</item>
+        <item>Cook</item>
+        <item>Constructor</item>
+        <item>Transportation Helper</item>
     </string-array>
 </resources>
