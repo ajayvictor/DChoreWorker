@@ -97,11 +97,12 @@ public class LoginActivity extends AppCompatActivity {
 
                         //creating a new user object
                         User user = new User(
-                                userJson.getInt("id"),
+                                userJson.getString("name"),
                                 userJson.getString("username"),
                                 userJson.getString("email"),
                                 userJson.getString("gender"),
-                                userJson.getString("category")
+                                userJson.getString("category"),
+                                userJson.getString("location")
                         );
 
                         //storing the user in shared preferences

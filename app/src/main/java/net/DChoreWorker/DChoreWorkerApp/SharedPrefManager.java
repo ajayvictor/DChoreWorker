@@ -17,8 +17,9 @@ public class SharedPrefManager {
     private static final String KEY_USERNAME = "KEY_USERNAME";
     private static final String KEY_EMAIL = "KEY_EMAIL";
     private static final String KEY_GENDER = "KEY_GENDER";
-    private static final String KEY_ID = "KEY_ID";
+    private static final String KEY_NAME = "KEY_NAME";
     private static final String KEY_CATEGORY = "KEY_CATEGORY";
+    private static final String KEY_LOCATION = "KEY_LOCATION";
 
     private static SharedPrefManager mInstance;
     private static Context mCtx;
@@ -39,11 +40,12 @@ public class SharedPrefManager {
     public void userLogin(User user) {
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putInt(KEY_ID, user.getId());
+        editor.putString(KEY_NAME, user.getName());
         editor.putString(KEY_USERNAME, user.getUsername());
         editor.putString(KEY_EMAIL, user.getEmail());
         editor.putString(KEY_GENDER, user.getGender());
         editor.putString(KEY_CATEGORY, user.getCategory());
+        editor.putString(KEY_LOCATION, user.getLocation());
         editor.apply();
     }
 
@@ -58,11 +60,12 @@ public class SharedPrefManager {
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
 
         return new User(
-                sharedPreferences.getInt(KEY_ID, -1),
+                sharedPreferences.getString(KEY_NAME, null),
                 sharedPreferences.getString(KEY_USERNAME, null),
                 sharedPreferences.getString(KEY_EMAIL, null),
                 sharedPreferences.getString(KEY_GENDER, null),
-                sharedPreferences.getString(KEY_CATEGORY, null)
+                sharedPreferences.getString(KEY_CATEGORY, null),
+                sharedPreferences.getString(KEY_LOCATION, null)
         );
     }
 

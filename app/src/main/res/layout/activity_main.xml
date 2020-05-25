@@ -7,12 +7,28 @@
     tools:context=".MainActivity">
 
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:orientation="vertical"
         android:padding="10dp">
+
+
+        <EditText
+            android:id="@+id/editTextName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="sans-serif"
+            android:hint="Name"
+            android:inputType="text" />
 
 
         <EditText
@@ -133,10 +149,14 @@
             android:layout_height="65dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:text="Already Registered?\n\nLogin Here"
+            android:text="Already Registered?\nLogin Here"
             android:textAlignment="center"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+
     </LinearLayout>
+
+    </ScrollView>
 
     <ProgressBar
         android:id="@+id/progressBar"
