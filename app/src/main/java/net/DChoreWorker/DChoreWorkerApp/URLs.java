@@ -2,7 +2,7 @@ package net.DChoreWorker.DChoreWorkerApp;
 
 public class URLs {
 
-    private static final String ROOT_URL = "http://192.168.1.3:5000/";
+    private static final String ROOT_URL = "";
 
     public static final String URL_REGISTER = ROOT_URL + "worker_signup";
     public static final String URL_LOGIN = ROOT_URL + "login";
