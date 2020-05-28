@@ -201,7 +201,6 @@ public class MainActivity extends AppCompatActivity {
                                 userJson.getString("gender"),
                                 userJson.getString("category"),
                                 userJson.getString("location")
-
                         );
 
                         //storing the user in shared preferences
@@ -211,7 +210,7 @@ public class MainActivity extends AppCompatActivity {
                         finish();
                         startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
                     } else {
-                        Toast.makeText(getApplicationContext(), "Some error occurred", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), obj.getString("status_message"), Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

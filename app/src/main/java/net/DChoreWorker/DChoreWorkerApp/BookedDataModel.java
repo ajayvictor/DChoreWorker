@@ -8,17 +8,18 @@ public class BookedDataModel {
     String email;
     String location;
     int mobile;
-    double experience;
     String date;
     String time;
+    String status;
 
-    public BookedDataModel(String name, String email, String location, int mobile, String date, String time) {
+    public BookedDataModel(String name, String email, String location, int mobile, String date, String time, String status) {
         this.name = name;
         this.email = email;
         this.location = location;
         this.mobile=mobile;
         this.date=date;
         this.time=time;
+        this.status=status;
     }
 
 
@@ -49,5 +50,10 @@ public class BookedDataModel {
     public String getTime() {
         return time;
     }
+
+    public String getStatus() {
+        return status;
+    }
+
 
 }

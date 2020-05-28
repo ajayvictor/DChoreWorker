@@ -115,7 +115,7 @@ public class LoginActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), obj.getString("status_message"), Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {
-                    Toast.makeText(getApplicationContext(), "Error Occured while connecting to the server", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Error occurred while connecting to the server", Toast.LENGTH_SHORT).show();
 
                     e.printStackTrace();
                 }

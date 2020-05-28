@@ -8,6 +8,7 @@ public class URLs {
     public static final String URL_LOGIN = ROOT_URL + "login";
     public static final String URL_WORKER_LOGIN = ROOT_URL + "worker_login";
     public static final String URL_WORKERS_BOOKING = ROOT_URL + "workers_bookings";
+    public static final String URL_WORKER_BOOKING_CONFIRM = ROOT_URL + "confirm_booking";
 
 
     public static final String URL_WORKER_DATA = ROOT_URL + "workers_data";

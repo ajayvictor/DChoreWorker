@@ -13,6 +13,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -76,6 +77,8 @@ public class ProfileActivity extends AppCompatActivity {
 
         myOnClickListener = new MyOnClickListener(this);
 
+
+
         if(user.getCategory().equals("Worker")) {
 
             recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
@@ -90,9 +93,10 @@ public class ProfileActivity extends AppCompatActivity {
             final String username = user.getUsername();
 
 
+
             TextView textViewBook = findViewById(R.id.textViewBook);
 
-            textViewBook.setText("Please check your works below!!");
+            textViewBook.setText("Please click to confirm!!");
 
 
             class BookedWorkerDatas extends AsyncTask<Void, Void, String> {
@@ -132,7 +136,8 @@ public class ProfileActivity extends AppCompatActivity {
                                         first.getString("location"),
                                         first.getInt("mobile"),
                                         first.getString("date"),
-                                        first.getString("time")
+                                        first.getString("time"),
+                                        first.getString("status")
                                 ));
                             }
 
@@ -146,12 +151,10 @@ public class ProfileActivity extends AppCompatActivity {
 
 
                         } else {
-                            Log.d("Status Message","Error Occured");
-
-                            //Toast.makeText(context.getApplicationContext(), "Invalid username or password", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), obj.getString("status_message"), Toast.LENGTH_SHORT).show();
                         }
                     } catch (JSONException e) {
-                        Toast.makeText(getApplicationContext(), "Error Occured while connecting to the server", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Error occurred while connecting to the server", Toast.LENGTH_SHORT).show();
 
                         e.printStackTrace();
                     }
@@ -174,7 +177,6 @@ public class ProfileActivity extends AppCompatActivity {
             BookedWorkerDatas bookedWorkerDatas = new BookedWorkerDatas();
             bookedWorkerDatas.execute();
 
-
         }
         else{
 
@@ -196,20 +198,37 @@ public class ProfileActivity extends AppCompatActivity {
 
         @Override
         public void onClick(View v) {
+            Log.d("Status Message","clicked");
+
 
             int selectedItemPosition = recyclerView.getChildPosition(v);
             RecyclerView.ViewHolder viewHolder
                     = recyclerView.findViewHolderForPosition(selectedItemPosition);
             TextView textViewName
                     = (TextView) viewHolder.itemView.findViewById(R.id.textViewName);
-            String selectedName = (String) textViewName.getText();
+
+            TextView textViewMobile
+                    = (TextView) viewHolder.itemView.findViewById(R.id.textViewMobile);
+
+            Button date_btn
+                    = (Button) viewHolder.itemView.findViewById(R.id.date_btn);
+
+            Button time_btn
+                    = (Button) viewHolder.itemView.findViewById(R.id.time_btn);
+
+
+            final String selectedName = (String) textViewName.getText();
+            final String selectedMobile = (String) textViewMobile.getText();
+            final String date = (String) date_btn.getText();
+            final String time = (String) time_btn.getText();
+
 
 
             AlertDialog.Builder builder = new AlertDialog.Builder(this.context);
-            builder.setTitle("Confirm dialog demo !");
-            builder.setMessage("You are about to book this worker named as " + selectedName + ", Do you want to confirm?");
+            builder.setTitle("Confirm Work Item !");
+            builder.setMessage("You are about to confirm this work for " + selectedName + " Do you want to confirm? or Press cancel to Cancel this work!");
             builder.setCancelable(false);
-            builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     User user;
@@ -248,14 +267,11 @@ public class ProfileActivity extends AppCompatActivity {
 
 
                                 } else {
-                                    Log.d("Status Message","Error Occured with error message: " + s);
-                                    Toast.makeText(context.getApplicationContext(), "Error Occured with error message: " + s, Toast.LENGTH_SHORT).show();
-
-
+                                    Toast.makeText(getApplicationContext(), obj.getString("status_message"), Toast.LENGTH_SHORT).show();
                                     //Toast.makeText(context.getApplicationContext(), "Invalid username or password", Toast.LENGTH_SHORT).show();
                                 }
                             } catch (JSONException e) {
-                                Toast.makeText(context.getApplicationContext(), "Error Occured while connecting to the server", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context.getApplicationContext(), "Error occurred while connecting to the server", Toast.LENGTH_SHORT).show();
                                 e.printStackTrace();
                             }
                         }
@@ -268,10 +284,14 @@ public class ProfileActivity extends AppCompatActivity {
                             //creating request parameters
                             HashMap<String, String> params = new HashMap<>();
                             params.put("username", username);
-                            System.out.println("Execution Happening");
+                            params.put("mobile", selectedMobile);
+                            params.put("name", selectedName);
+                            params.put("date", date);
+                            params.put("time", time);
+                            params.put("status", "Confirmed");
 
                             //returing the response
-                            return requestHandler.sendPostRequest(URLs.URL_WORKER_CONFIRM, params);
+                            return requestHandler.sendPostRequest(URLs.URL_WORKER_BOOKING_CONFIRM, params);
                         }
                     }
                     new WorkerConfirm().execute();
@@ -279,10 +299,79 @@ public class ProfileActivity extends AppCompatActivity {
                 }
             });
 
-            builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    Toast.makeText(context.getApplicationContext(), "You've changed your mind to book this worker!! Feel free to book again, Thanks!", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(context.getApplicationContext(), "You've cancelled this work!", Toast.LENGTH_SHORT).show();
+
+                    User user;
+                    user = SharedPrefManager.getInstance(context.getApplicationContext()).getUser();
+                    final String username = user.getUsername();
+
+
+
+                    class WorkerConfirm extends AsyncTask<Void, Void, String> {
+                        ProgressBar progressBar;
+
+
+                        @Override
+                        protected void onPreExecute() {
+                            super.onPreExecute();
+                            progressBar = (ProgressBar) findViewById(R.id.progressBar);
+                            progressBar.setVisibility(View.VISIBLE);
+
+                        }
+
+                        @Override
+                        protected void onPostExecute(String s) {
+                            super.onPostExecute(s);
+                            progressBar = (ProgressBar) findViewById(R.id.progressBar);
+                            progressBar.setVisibility(View.GONE);
+
+                            try {
+                                //converting response to json object
+                                JSONObject obj = new JSONObject(s);
+
+                                //if no error in response
+                                if (obj.getBoolean("status")) {
+                                    Log.d("Status Message",obj.getString("status_message"));
+
+                                    Toast.makeText(context.getApplicationContext(), obj.getString("status_message"), Toast.LENGTH_SHORT).show();
+
+
+                                } else {
+                                    Toast.makeText(getApplicationContext(), obj.getString("status_message"), Toast.LENGTH_SHORT).show();
+                                    //Toast.makeText(context.getApplicationContext(), "Invalid username or password", Toast.LENGTH_SHORT).show();
+                                }
+                            } catch (JSONException e) {
+                                Toast.makeText(context.getApplicationContext(), "Error occurred while connecting to the server", Toast.LENGTH_SHORT).show();
+                                e.printStackTrace();
+                            }
+                        }
+
+                        @Override
+                        protected String doInBackground(Void... voids) {
+                            //creating request handler object
+                            RequestHandler requestHandler = new RequestHandler();
+
+                            //creating request parameters
+                            HashMap<String, String> params = new HashMap<>();
+                            params.put("username", username);
+                            params.put("mobile", selectedMobile);
+                            params.put("name", selectedName);
+                            params.put("date", date);
+                            params.put("time", time);
+                            params.put("status", "Cancelled");
+
+
+                            //returing the response
+                            return requestHandler.sendPostRequest(URLs.URL_WORKER_BOOKING_CONFIRM, params);
+                        }
+                    }
+                    new WorkerConfirm().execute();
+
+
+
                 }
             });
 

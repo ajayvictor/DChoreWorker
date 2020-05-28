@@ -22,6 +22,7 @@ public class BookedCustomAdapter extends RecyclerView.Adapter<BookedCustomAdapte
         TextView textViewEmail;
         TextView textViewLocation;
         TextView textViewMobile;
+        TextView textViewstatus;
 
         Button btn_date, btn_time;
 
@@ -32,6 +33,7 @@ public class BookedCustomAdapter extends RecyclerView.Adapter<BookedCustomAdapte
             this.textViewEmail = (TextView) itemView.findViewById(R.id.textViewEmail);
             this.textViewLocation = (TextView) itemView.findViewById(R.id.textViewLocation);
             this.textViewMobile = (TextView) itemView.findViewById(R.id.textViewMobile);
+            this.textViewstatus = (TextView) itemView.findViewById(R.id.textViewstatus);
 
             this.btn_date=(Button) itemView.findViewById(R.id.date_btn);
 
@@ -58,6 +60,12 @@ public class BookedCustomAdapter extends RecyclerView.Adapter<BookedCustomAdapte
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.cards_layout, parent, false);
 
+
+
+        // For disabling click on cards!!!!!! It screwed me for almost 2 hours!!!
+        view.setOnClickListener(ProfileActivity.myOnClickListener);
+
+
         MyViewHolder myViewHolder = new MyViewHolder(view);
         return myViewHolder;
     }
@@ -69,6 +77,7 @@ public class BookedCustomAdapter extends RecyclerView.Adapter<BookedCustomAdapte
         TextView textViewEmail = holder.textViewEmail;
         TextView textViewLocation = holder.textViewLocation;
         TextView textViewMobile = holder.textViewMobile;
+        TextView textViewstatus = holder.textViewstatus;
         Button btn_date = holder.btn_date;
         Button btn_time = holder.btn_time;
 
@@ -77,6 +86,7 @@ public class BookedCustomAdapter extends RecyclerView.Adapter<BookedCustomAdapte
         textViewEmail.setText(dataSet.get(listPosition).getEmail());
         textViewLocation.setText(dataSet.get(listPosition).getLocation());
         textViewMobile.setText(String.valueOf(dataSet.get(listPosition).getMobile()));
+        textViewstatus.setText("Booking Status: " + String.valueOf(dataSet.get(listPosition).getStatus()));
         btn_date.setText(String.valueOf(dataSet.get(listPosition).getDate()));
         btn_time.setText(String.valueOf(dataSet.get(listPosition).getTime()));
 
