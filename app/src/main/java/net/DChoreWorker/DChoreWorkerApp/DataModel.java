@@ -8,10 +8,10 @@ public class DataModel {
     String job;
     String place;
     int age;
-    int mobile;
+    String mobile;
     double experience;
 
-    public DataModel(String name, String job, int age, String place, int mobile, double experience) {
+    public DataModel(String name, String job, int age, String place, String mobile, double experience) {
         this.name = name;
         this.job = job;
         this.age = age;
@@ -41,7 +41,7 @@ public class DataModel {
     }
 
 
-    public int getMobile() {
+    public String getMobile() {
         return mobile;
     }
 

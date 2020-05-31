@@ -7,12 +7,12 @@ public class BookedDataModel {
     String name;
     String email;
     String location;
-    int mobile;
+    String mobile;
     String date;
     String time;
     String status;
 
-    public BookedDataModel(String name, String email, String location, int mobile, String date, String time, String status) {
+    public BookedDataModel(String name, String email, String location, String mobile, String date, String time, String status) {
         this.name = name;
         this.email = email;
         this.location = location;
@@ -33,7 +33,7 @@ public class BookedDataModel {
     }
 
 
-    public int getMobile() {
+    public String getMobile() {
         return mobile;
     }
 
